@@ -3,11 +3,16 @@ from tkinter import ttk
 
 class Contacts:
     def __init__(self, root):
+        self.create_GUI()
+
+    def create_GUI(self):
         self.root = root
         self.create_left_icon()
         self.create_label_frame()
         self.create_message_area()
         self.create_tree_view()
+        self.create_scrollbar()
+        self.create_bottom_buttons()
 
     def create_left_icon(self):
         photo = PhotoImage(file = 'Resources/Logo.gif')
@@ -39,6 +44,14 @@ class Contacts:
         self.tree.heading('#0', text = 'Name', anchor = W)
         self.tree.heading('email', text = 'Email adress', anchor = W)
         self.tree.heading('number', text = 'Phone number', anchor = W)
+
+    def create_scrollbar(self):
+        self.scrollbar = Scrollbar(orient = 'vertical', command = self.tree.yview)
+        self.scrollbar.grid(row = 6, column = 3, rowspan = 10, sticky='sn')
+
+    def create_bottom_buttons(self):
+        Button(text = 'Delete Selected', command = "", bg = "red", fg = "white").grid(row = 8, column = 0, sticky = W, padx = 20, pady = 10)
+        Button(text = 'Modify selected', command = "", bg = "purple", fg = "white").grid(row = 8, column = 1, sticky = W)
 
 if __name__ == "__main__":
     root = Tk()
